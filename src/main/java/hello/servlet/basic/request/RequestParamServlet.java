@@ -1,2 +1,4 @@
-package hello.servlet.basic.request;public class RequestParamServlet {
+package hello.servlet.basic.request;
+
+public class RequestParamServlet {
 }
