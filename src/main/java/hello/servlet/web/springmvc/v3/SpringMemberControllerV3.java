@@ -4,6 +4,8 @@ import hello.servlet.domain.member.Member;
 import hello.servlet.domain.member.MemberRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,7 +19,7 @@ import java.util.List;
 public class SpringMemberControllerV3 {
     private MemberRepository memberRepository = MemberRepository.getInstance();
 
-    @RequestMapping("/save")
+    @PostMapping("/save")
     public String save(@RequestParam("username") String username, @RequestParam("age") int age, Model model) {
     /*  @RequestParam으로 request에서 바로 받아와서 이 코드들 필요 없
         String username = request.getParameter("username");
@@ -30,16 +32,15 @@ public class SpringMemberControllerV3 {
         return "save-result";
     }
 
-    @RequestMapping
-    public String members() {
+    @GetMapping
+    public String members(Model model) {
         List<Member> members = memberRepository.findAll();
-        ModelAndView mv = new ModelAndView("members");
-        mv.addObject("members", members);
+        model.addAttribute("members",members);
 
-        return mv;
+        return "members";
     }
 
-    @RequestMapping("/new-form")
+    @GetMapping("/new-form")
     public String newForm(){
 
         return "new-form";
